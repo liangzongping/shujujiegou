@@ -100,7 +100,7 @@ STU* slistFind(STU* head, int x)
 	}
 	return NULL;
 }
-void slistInsert(STU** head, int x)
+void slistInsert(STU** head, int x)//没有头的单链表，需要传二级指针
 {//后面插入
 	/*STU* newhead = (STU*)malloc(sizeof(STU));
 	newhead->num = x;
@@ -122,7 +122,6 @@ void slistInsert(STU** head, int x)
 	{
 		newhead->next = *head;
 		*head = newhead;
-		
 	}
 	else 
 	{
