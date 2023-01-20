@@ -1,44 +1,33 @@
-#include"SLIST.h"
+#include"stack.h"
 void test1()
 {
-	STU* head = NULL;
-	slistpushback(&head,2);
-	slistpushback(&head,1);
-	slistpushback(&head,3);
-	slistpushback(&head, 2);
-	slistpushback(&head,4);
-	/*slistpushFront(&head, 0);
-	slistpushFront(&head, 9);
-	slistpushFront(&head, 6);*/
-	//slistDeleback(&head);
-	/*slistDelefront(&head);
-	slistDelefront(&head);*/
-	//slistDelefront(&head);
-	//slistDelefront(&head);
-	//slistprint(head);
-	/*STU* P = slistFind(head, 2);
-	int i=1;
-	while (P)
+	ST st;
+	stackinit(&st);
+	stackpush(&st, 1);
+	stackpush(&st, 2);
+	stackpush(&st, 3);
+	stackpush(&st, 4);
+	stackpop(&st);
+	stackpop(&st);
+	stackpush(&st, 5);
+	stackpush(&st, 6);
+	while (!(stackempty(&st)))//遍历查看；
 	{
-		printf("\n%d\n", i++);
-		P= slistFind(P->next, 2);
-	}*/
-	/*STU *P= slistFind(head, 3);
-	if(P!=NULL)
-	P->num = 66;
-	printf("\n");
-	slistprint(head);*/
-	/*printf("\n");
-	slistInsert(&head, 66);
-	slistprint(head);
-	printf("\n");
-	int n;
-	printf("请输入你要删除哪个数字\n");
-	scanf("%d", &n);
-	slistInsertdele(&head, n);*/
-
-	slistprint(head);
-	slistdestory(&head);
+		printf("%d ", stacktop(&st));
+		stackpop(&st);
+	}
+	/*stackpop(&st);
+	stackpop(&st);
+	stackpop(&st);
+	stackpop(&st);
+	stackpop(&st);*/
+	//printf("%d", stacktop(&st));
+	/*if (stackempty(&st))
+		printf("空\n");
+	else
+		printf("不空\n");*/
+	printf("\n%d",sizestack(&st));
+	stackdestroy(&st);
 }
 int main()
 {
