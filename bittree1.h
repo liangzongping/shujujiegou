@@ -9,6 +9,7 @@ typedef struct BitTree {
 }BitTree;
 void bittreecreate(BitTree** p);//二级传参
 void showbittree(BitTree* p);
+int nodenum(BitTree* p);
 //栈
 typedef struct ST {
 	BitTree** a;

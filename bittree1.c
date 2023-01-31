@@ -125,3 +125,17 @@ void showbittree(BitTree* p)//非递归实现
 	//	}
 	//}
 }//思路：先出左孩子，判断该左孩子是否有右孩子，若有就把改左孩子送回栈中，遍历该右孩子，接着重复上面操作
+int nodenum(BitTree* p)
+{
+	int count = 0;
+	if (p == NULL)
+		return 0;//结束条件
+	else
+	{
+		count++;//第一个节点
+		count += nodenum(p->lchild );//加上左孩子个数
+		count += nodenum(p->rchild);//加上右孩子个数
+	}
+	return count;
+
+}
