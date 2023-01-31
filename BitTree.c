@@ -52,9 +52,123 @@ void bittreecreate(BitTree **p)
 //		return NULL;
 //	}
 //}
+void bittreecopy(BitTree** q, BitTree* p)//传二级是因为要改变q
+{
+	if (p == NULL)
+	{
+		*q = NULL;
+	}//遇到空复制空
+	else {
+		
+		*q = (BitTree*)malloc(sizeof(BitTree));
+		if(*q==NULL)
+		{
+			return;
+		}	
+	(*q)->data = p->data;
+	bittreecopy(&((*q)->lchild), p->lchild);//递归复制
+	bittreecopy(&((*q)->rchild), p->rchild);
+		
+	}
 	
+}
+int bittreeEmpty(BitTree* p)
+{
+	if (p == NULL)
+		return 1;
+	return 0;
+}
+int leaves(BitTree* p)
+{//递归写法
+	if (p == NULL)//结束条件
+	{
+		return 0;
+	}
+	else if (p->lchild == NULL && p->rchild == NULL)
+	{
+		return 1;
+	}
+	else
+	{
+		return leaves(p->lchild) + leaves(p->rchild);//累加
+	}
+}
+int deep(BitTree* p)
+{
+	int lnum, rnum;
+	if (p == NULL)
+		return 0;
+	else
+	{
+		lnum = deep(p->lchild);
+		rnum = deep(p->rchild);
+		if (lnum > rnum)
+		{
+			return lnum + 1;
+		}
+		else
+		{
+			return rnum + 1;
+		}
+	}
+}
+int floor(BitTree* p, int x)
+{
+	int lnum;
+	int rnum;
+	int fnum;
+	if (p == NULL)
+		 fnum=-1;
+	else if (p->data ==x)
+	{
+		fnum = 1;
+	}
+	else
+	{
+		lnum = floor(p->lchild, x);
+		rnum = floor(p->rchild, x);
+		if (lnum == 0 && rnum == 0)
+		{
+			//printf("找不到其所在的层数\n");
+			fnum = -1;
+		}
+		else
+		{
+			if (lnum > rnum)
+				fnum = lnum + 1;
+			else
+				fnum = rnum + 1;
+		}
+	}
+	return fnum;
+}
+int nodenum(BitTree* p)
+{
+	//递归（1）
+	//if (p == NULL)
+	//	return 0;
+	//else
+	//{
+	//	return (nodenum(p->lchild) + nodenum(p->rchild) + 1);
+	//}
+	//递归（2）
+	int count = 0;
+	if (p == NULL)
+		return 0;//结束条件
+	else
+	{
+		count++;//第一个节点
+		count += nodenum(p->lchild);//加上左孩子个数
+		count += nodenum(p->rchild);//加上右孩子个数
+	}
+	return count;
+}
 void showbittree(BitTree* p)//二叉树的遍历也用到递归（层次除外）
 {
+	if (p == NULL)
+	{
+		return;
+	}
 //	//前序遍历
 //	if (p == NULL)
 //	{
@@ -102,5 +216,19 @@ void showbittree(BitTree* p)//二叉树的遍历也用到递归（层次除外）
 			squeuepush(&a, n->rchild);
 		}
 	}	
-}
 
+}
+void bittreedestroy(BitTree** p)
+{
+	if (*p == NULL)
+	{
+		return;
+	}
+	else
+	{
+		bittreedestroy(&((*p)->lchild));
+		bittreedestroy(&((*p)->rchild));
+		free(*p);
+		*p = NULL;
+	}
+}

@@ -12,7 +12,13 @@ typedef struct BitTree {
 void bittreecreate(BitTree **p);//二级传参
 //BitTree* bittreecreate();
 void showbittree(BitTree* p);
-
+void bittreecopy(BitTree** q, BitTree* p);
+int bittreeEmpty(BitTree* p);
+int leaves(BitTree* p);
+int deep(BitTree* p);
+int floor(BitTree* p, int x);
+int nodenum(BitTree* p);
+void bittreedestroy(BitTree** p);
 
 //队列
 typedef struct squeue {
